@@ -65,8 +65,8 @@
 			// Target properties
 			var target = $(this).attr('href') ? $( $(this).attr('href') ) : $(this);
 			var targetHeight = $(target).outerHeight(true, true);
-			var targetTop = $(target).offset().top;
-			var targetLeft = $(target).offset().left;
+			var targetTop = $(target).position().top;
+			var targetLeft = $(target).position().left;
 
 			// Additional trigger to launch picker
 			var trigger = $(this).attr('href') ? $(this) : null;
@@ -81,54 +81,63 @@
 			var columns = 8;
 			var rows = 6;
 
-			var table = $('<table />')
-				.attr({
-					'class': 'crayonpicker-table',
-					cellpadding: 0,
-					cellspacing: 0,
-					border: 0
-				})
-				.css({
-					display: 'none',
-					position: 'absolute',
-					top: pickerTop,
-					left: pickerLeft
-				});
+			var table;
 
-			// For each row
-			for (var r = 1; r <= rows; r++) {
+			// If we already have a crayon picker table
+			if ( $(target).siblings('table.crayonpicker-table').length > 0 ) {
+				table = $(target).siblings('table.crayonpicker-table');
+			}
+			// If we do not already have a crayon picker table
+			else {
+				table = $('<table />')
+					.attr({
+						'class': 'crayonpicker-table',
+						cellpadding: 0,
+						cellspacing: 0,
+						border: 0
+					})
+					.css({
+						display: 'none',
+						position: 'absolute',
+						top: pickerTop,
+						left: pickerLeft
+					});
 
-				// Row
-				var tr = $('<tr />');
+				// For each row
+				for (var r = 1; r <= rows; r++) {
 
-				// For each column inside current row
-				for (var c = 1; c <= columns; c++) {
+					// Row
+					var tr = $('<tr />');
 
-					// Index of color in colors array
-					var index = (r * columns) - columns + c - 1;
+					// For each column inside current row
+					for (var c = 1; c <= columns; c++) {
 
-					// Get color code
-					var color = colors[index];
+						// Index of color in colors array
+						var index = (r * columns) - columns + c - 1;
 
-					// Cell
-					var td = $('<td />');
+						// Get color code
+						var color = colors[index];
 
-					// Anchor link
-					var a = $('<a />').attr('href', color).css('background-color', color).html(color);
+						// Cell
+						var td = $('<td />');
 
-					// Append link in cell
-					$(td).append(a);
+						// Anchor link
+						var a = $('<a />').attr('href', color).css('background-color', color).html(color);
 
-					// Append cell in row
-					$(tr).append(td);
+						// Append link in cell
+						$(td).append(a);
+
+						// Append cell in row
+						$(tr).append(td);
+					}
+
+					// Append row in table
+					$(table).append(tr);
 				}
 
-				// Append row in table
-				$(table).append(tr);
+				// Place table after target element
+				$(this).after(table);
 			}
-
-			// Place table after target element
-			$(this).after(table);
 
 			// Set color on click
 			$(table).delegate('a', 'click', function(e) {
@@ -150,7 +159,7 @@
 			});
 
 			// Show picker on focus
-			$(target).delegate(null, 'focusin', function() {
+			$(target).bind('focusin', function() {
 				// Run onOpen() function
 				settings.onOpen(target, trigger, $(target).val());
 
@@ -159,7 +168,7 @@
 			});
 
 			// Show picker on trigger click
-			$(trigger).delegate(null, 'click', function(e) {
+			$(trigger).bind('click', function(e) {
 				e.preventDefault();
 
 				// Run onOpen() function
@@ -170,7 +179,7 @@
 			});
 
 			// Hide picker
-			$(document).delegate(null, 'click', function(e) {
+			$(document).bind('click', function(e) {
 				// If table is open AND clicked element was our not our target element AND not our trigger element
 				if ( $(table).is(':visible') && $(e.target).get(0) != $(target).get(0) && $(e.target).get(0) != $(trigger).get(0) ) {
 					// Run onClose() function

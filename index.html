@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>jQuery Crayon Picker</title>
+	<style type="text/css">
+		table {
+			box-shadow: 0px 0px 15px #999;
+		}
+		table td a {
+			text-indent: -999em;
+			display: block;
+			width: 25px;
+			height: 25px;
+		}
+	</style>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.crayonpicker.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			// Toggle code
+			$('h2 a').click(function(e) {
+				e.preventDefault();
+				$( $(this).attr('href') ).toggle();
+			});
+
+			// Pick it!
+			$('#colorpicker_1, #colorpicker_2_trigger').colorpicker({
+				onOpen: function(target, trigger, color) {
+					//console.log('Open');
+				},
+				onClose: function(target, trigger, color) {
+					console.log('Close');
+				},
+				onSelection: function(target, trigger, color) {
+					//console.log('Selected ', color);
+				},
+				onChange: function(target, trigger, color) {
+					$(target).css('background-color', color);
+				}
+			});
+		});
+	</script>
+
+	<style type="text/css">
+		html {
+			font: 12px/16px "Tahoma", "Verdana", "Arial", sans-serif;
+			color: #797979;
+		}
+		fieldset {
+			padding: 0px 15px 5px 15px;
+			margin: 15px;
+			background-color: #f1f1f1;
+			border: 1px solid #eaeaea;
+		}
+		legend {
+			display: none;
+		}
+		h2 {
+			font: normal 18px/24px "DejaVu Sans", "Myriad Pro", sans-serif;
+			color: #545454;
+			margin: 15px 0px;
+			padding: 0px;
+		}
+		h2 a {
+			float: right;
+			font: 12px/20px "Tahoma", "Verdana", "Arial", sans-serif;
+			color: #b9b9b9;
+			text-transform: uppercase;
+			text-decoration: none;
+		}
+		a {
+			color: #0080ff;
+		}
+		pre {
+			display: none;
+			margin: 10px 0px;
+			font: 11px/18px "DejaVu Sans Mono", monospace;
+			color: #fff;
+			background-color: #3e3e3e;
+			padding: 10px;
+			border: 1px solid #313131;
+		}
+		fieldset > div {
+			margin: 10px 0px;
+		}
+		fieldset > div label:first-child {
+			display: inline-block;
+			width: 120px;
+			vertical-align: top;
+			line-height: 26px;
+		}
+		label {
+			cursor: pointer;
+			color: #555;
+		}
+		input[type="text"] {
+			border: 1px solid #dfdfdf;
+			padding: 3px;
+			width: 220px;
+			color: #999;
+			font-family: "DejaVu Sans Mono", monospace;
+		}
+		input[type="text"]:focus {
+			border-color: #dfdfdf;
+			color: #333;
+		}
+	</style>
+
+</head>
+
+<body>
+
+<div>
+
+	<form method="get" action="">
+		<fieldset>
+			<legend>jQuery Crayon Picker Demo</legend>
+			<h2>jQuery Crayon Picker Demo <a href="#example_1">Code</a></h2>
+			<div>
+				<label for="colorpicker_1">Color</label>
+				<input type="text" id="colorpicker_1" />
+			</div>
+			<div>
+				<label for="colorpicker_2">Color</label>
+				<input type="text" id="colorpicker_2" />
+				<a href="#colorpicker_2" id="colorpicker_2_trigger">Crayon Picker Trigger</a>
+			</div>
+<pre id="example_1">
+// Pick it!
+$(&#39;#colorpicker_1, #colorpicker_2_trigger&#39;).colorpicker({
+	onOpen: function(target, trigger, color) {
+		//console.log(&#39;Open&#39;);
+	},
+	onClose: function(target, trigger, color) {
+		//console.log(&#39;Close&#39;);
+	},
+	onSelection: function(target, trigger, color) {
+		//console.log(&#39;Selected &#39;, color);
+	},
+	onChange: function(target, trigger, color) {
+		$(target).css(&#39;background-color&#39;, color);
+	}
+});</pre>
+		</fieldset>
+	</form>
+
+</div>
+
+</body>
+</html>

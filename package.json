@@ -1,0 +1,40 @@
+{
+	"name": "crayonpicker",
+	"version": "0.1",
+	"title": "jQuery Crayon Picker",
+	"author": {
+		"name": "Victor Michnowicz",
+		"url": "http://www.vmichnowicz.com/"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "LICENSE.txt"
+		}
+	],
+	"dependencies": {
+		"jquery": ">1.4.3"
+	},
+	"description": "Very simple jQuery color picker plugin",
+	"keywords": [
+		"color picker",
+		"colorpicker",
+		"color",
+		"colors",
+		"crayon",
+		"crayons"
+	],
+	"homepage": "https://github.com/vmichnowicz/jquery.crayonpicker",
+	"maintainers": [
+		{
+			"name": "Victor Michnowicz",
+			"url": "http://www.vmichnowicz.com/"
+		}
+	],
+	"files": [
+		"index.html",
+		"jquery.crayonpicker.js",
+		"LICENSE.txt",
+		"README.md",
+	]
+}

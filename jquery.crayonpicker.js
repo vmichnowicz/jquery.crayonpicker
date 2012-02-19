@@ -8,7 +8,7 @@
  */
 (function($) {
 
-	$.fn.colorpicker = function(options) {
+	$.fn.crayonpicker = function(options) {
 
 		// Merge options into settings object
 		var settings = $.extend({
